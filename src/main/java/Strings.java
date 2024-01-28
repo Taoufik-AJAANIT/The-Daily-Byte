@@ -3,11 +3,12 @@ package main.java;
 
 public class Strings {
     public String reverse(String input) {
-        String reversed = "";
-        for (int i = input.length() - 1; i >= 0; i--) {
-            reversed += input.charAt(i);
+        char[] reversed = new char[input.length()];
+        for (int i = 0, j = input.length() - 1; i <= j; i++, j--) {
+            reversed[j] = input.charAt(i);
+            reversed[i] = input.charAt(j);
         }
-        return reversed;
+        return String.valueOf(reversed);
     }
 
     public boolean isPalindrome(String input) {
