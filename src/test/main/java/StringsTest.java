@@ -39,4 +39,12 @@ class StringsTest {
         assertFalse(strings.isCyclicTrajectory("URURD"));
         assertTrue(strings.isCyclicTrajectory("RUULLDRD"));
     }
+    @Test
+    @DisplayName("Correct Capitalization\n")
+    void checkIsIsCorrectlyCapitalized() {
+        assertTrue(strings.isCorrectlyCapitalized("USA"));
+        assertTrue(strings.isCorrectlyCapitalized("Calvin"));
+        assertFalse(strings.isCorrectlyCapitalized("compUter"));
+        assertTrue(strings.isCorrectlyCapitalized("coding"));
+    }
 }

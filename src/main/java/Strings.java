@@ -46,4 +46,19 @@ public class Strings {
         };
         return count;
     }
+
+    public boolean isCorrectlyCapitalized(String input) {
+        if(input.toLowerCase().equals(input)){
+            return true;
+        }
+        if(input.toUpperCase().equals(input)){
+            return true;
+        }
+        if(Character.toUpperCase(input.charAt(0)) == input.charAt(0)
+                && input.substring(1, input.length() - 1).toLowerCase().equals(input.substring(1, input.length() - 1))
+        ){
+            return true;
+        }
+        return false;
+    }
 }
