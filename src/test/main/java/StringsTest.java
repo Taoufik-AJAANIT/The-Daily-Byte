@@ -47,4 +47,12 @@ class StringsTest {
         assertFalse(strings.isCorrectlyCapitalized("compUter"));
         assertTrue(strings.isCorrectlyCapitalized("coding"));
     }
+    @Test
+    @DisplayName("Add Binary")
+    void addBinary() {
+        assertEquals("101", strings.addBinary("100", "1"));
+        assertEquals("100", strings.addBinary("11", "1"));
+        assertEquals("1", strings.addBinary("1", "0"));
+        assertEquals("1111110", strings.addBinary("111111", "111111"));
+    }
 }
