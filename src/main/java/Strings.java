@@ -1,5 +1,8 @@
 package main.java;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class Strings {
     public String reverse(String input) {
         char[] reversed = new char[input.length()];
@@ -75,5 +78,20 @@ public class Strings {
             binaryResult.insert(0, 1);
         }
         return binaryResult.toString();
+    }
+
+    public String longestCommonPrefix(String[] matrix){
+        StringBuilder longestCommonPrefix = new StringBuilder();
+        char currentLetter;
+        for(int horizentalIterator = 0; horizentalIterator < matrix[0].length(); horizentalIterator++){
+            currentLetter = matrix[0].charAt(horizentalIterator);
+            for(int verticalIterator = 1; verticalIterator < matrix.length; verticalIterator++){
+                if(horizentalIterator >= matrix[verticalIterator].length() || matrix[verticalIterator].charAt(horizentalIterator) != currentLetter){
+                    return longestCommonPrefix.toString();
+                }
+            }
+            longestCommonPrefix.append(currentLetter);
+        }
+        return longestCommonPrefix.toString();
     }
 }
