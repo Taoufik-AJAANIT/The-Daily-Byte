@@ -1,8 +1,5 @@
 package main.java;
 
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 public class Strings {
     public String reverse(String input) {
         char[] reversed = new char[input.length()];
@@ -65,32 +62,18 @@ public class Strings {
     }
 
     public String addBinary(String a, String b) {
-        int maxLength = Math.max(a.length(), b.length());
-        int[] binaryResult = new int[maxLength];
+        StringBuilder binaryResult = new StringBuilder();
         int carrying = 0;
         for (int aIterator = a.length() - 1, bIterator = b.length() - 1; bIterator >= 0 || aIterator >= 0; aIterator--, bIterator--) {
             int columnTotal = Integer.parseInt(String.valueOf(aIterator >= 0 ? a.charAt(aIterator) : "0"))
                     + Integer.parseInt(String.valueOf(bIterator >= 0 ? b.charAt(bIterator) : "0"))
                     + carrying;
-            int maxIterator = Math.max(aIterator, bIterator);
-            if (columnTotal == 3) {
-                binaryResult[maxIterator] = 1;
-                carrying = 1;
-            } else if (columnTotal == 2) {
-                binaryResult[maxIterator] = 0;
-                carrying = 1;
-            } else {
-                binaryResult[maxIterator] = columnTotal;
-                carrying = 0;
-            }
+            binaryResult.insert(0, columnTotal % 2) ;
+            carrying = columnTotal / 2;
         }
         if (carrying == 1) {
-            return "1" + IntStream.of(binaryResult)
-                    .mapToObj(String::valueOf)
-                    .collect(Collectors.joining(""));
+            binaryResult.insert(0, 1);
         }
-        return IntStream.of(binaryResult)
-                .mapToObj(String::valueOf)
-                .collect(Collectors.joining(""));
+        return binaryResult.toString();
     }
 }
