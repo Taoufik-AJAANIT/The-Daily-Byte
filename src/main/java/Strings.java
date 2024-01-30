@@ -1,8 +1,5 @@
 package main.java;
 
-import java.util.Arrays;
-import java.util.Comparator;
-
 public class Strings {
     public String reverse(String input) {
         char[] reversed = new char[input.length()];
@@ -30,25 +27,23 @@ public class Strings {
     }
 
     public boolean isCyclicTrajectory(String trajectory) {
-        int numberOfRights = this.countOccurrencesOf(trajectory, 'R');
-        int numberOfLefts = this.countOccurrencesOf(trajectory, 'L');
-        int numberOfTops = this.countOccurrencesOf(trajectory, 'T');
-        int numberOfBottoms = this.countOccurrencesOf(trajectory, 'B');
-        if (numberOfRights == numberOfLefts && numberOfBottoms == numberOfTops) {
-            return true;
-        }
-        return false;
-    }
-
-    private int countOccurrencesOf(String s, char c) {
-        int count = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == c) {
-                count = count + 1;
+        int horizontalBalance = 0;
+        int verticalBalance = 0;
+        for (int i = 0; i < trajectory.length(); i++){
+            if (trajectory.charAt(i) == 'R'){
+                horizontalBalance = horizontalBalance + 1;
+            }
+            if (trajectory.charAt(i) == 'L'){
+                horizontalBalance = horizontalBalance - 1;
+            }
+            if (trajectory.charAt(i) == 'T'){
+                verticalBalance = verticalBalance + 1;
+            }
+            if (trajectory.charAt(i) == 'B'){
+                verticalBalance = verticalBalance - 1;
             }
         }
-        ;
-        return count;
+        return verticalBalance == 0 && horizontalBalance == 0;
     }
 
     public boolean isCorrectlyCapitalized(String input) {
@@ -58,10 +53,7 @@ public class Strings {
         if (input.toUpperCase().equals(input)) {
             return true;
         }
-        if (Character.toUpperCase(input.charAt(0)) == input.charAt(0) && input.substring(1, input.length() - 1).toLowerCase().equals(input.substring(1, input.length() - 1))) {
-            return true;
-        }
-        return false;
+        return Character.toUpperCase(input.charAt(0)) == input.charAt(0) && input.substring(1, input.length() - 1).toLowerCase().equals(input.substring(1, input.length() - 1));
     }
 
     public String addBinary(String a, String b) {
