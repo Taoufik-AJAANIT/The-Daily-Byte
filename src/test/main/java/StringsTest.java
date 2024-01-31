@@ -67,4 +67,12 @@ class StringsTest {
         assertEquals("", strings.longestCommonPrefix(new String[]{"a", "b", "c"}));
         assertEquals("spot", strings.longestCommonPrefix(new String[]{"spot", "spotty", "spotted"}));
     }
+
+    @Test
+    @DisplayName("Valid PalindromeWithRemoval")
+    void checkIfIsPalindromeWithRemoval() {
+        assertTrue(strings.isPalindromeWithRemoval("abcba"));
+        assertTrue(strings.isPalindromeWithRemoval("foobof"));
+        assertFalse(strings.isPalindromeWithRemoval("abccab"));
+    }
 }
