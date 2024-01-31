@@ -75,4 +75,11 @@ class StringsTest {
         assertTrue(strings.isPalindromeWithRemoval("foobof"));
         assertFalse(strings.isPalindromeWithRemoval("abccab"));
     }
+    @Test
+    @DisplayName("Valid PalindromeWithRemoval Recursive")
+    void checkIfIsPalindromeWithRemovalRecursive() {
+        assertTrue(strings.isPalindromeWithRemovalRecursive("abcba"));
+        assertTrue(strings.isPalindromeWithRemovalRecursive("foobof"));
+        assertFalse(strings.isPalindromeWithRemovalRecursive("abccab"));
+    }
 }

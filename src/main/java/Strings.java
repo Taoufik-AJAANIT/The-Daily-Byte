@@ -109,4 +109,13 @@ public class Strings {
         }
         return true;
     }
+    public boolean isPalindromeWithRemovalRecursive(String input) {
+        for (int iterator = 0, reverseIterator = input.length() - 1; iterator <= reverseIterator; iterator++, reverseIterator--) {
+            if (input.charAt(iterator) != input.charAt(reverseIterator)) {
+                return this.isPalindrome(input.substring(iterator + 1, (reverseIterator) + 1))
+                        || isPalindrome(input.substring(iterator, (reverseIterator - 1) + 1));
+            }
+        }
+        return true;
+    }
 }
