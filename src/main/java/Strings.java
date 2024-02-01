@@ -53,7 +53,8 @@ public class Strings {
         if (input.toUpperCase().equals(input)) {
             return true;
         }
-        return Character.toUpperCase(input.charAt(0)) == input.charAt(0) && input.substring(1, input.length() - 1).toLowerCase().equals(input.substring(1, input.length() - 1));
+        return Character.toUpperCase(input.charAt(0)) == input.charAt(0)
+                && input.substring(1, input.length() - 1).toLowerCase().equals(input.substring(1, input.length() - 1));
     }
 
     public String addBinary(String a, String b) {
