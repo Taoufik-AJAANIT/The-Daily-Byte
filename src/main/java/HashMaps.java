@@ -46,4 +46,18 @@ public class HashMaps {
         }
         return count;
     }
+
+    public boolean isValidAnagram(String s, String t) {
+        Map<Character, Integer> sMap = new HashMap<>();
+        for (int i = 0; i < s.length(); i++){
+            sMap.put(s.charAt(i), sMap.getOrDefault(s.charAt(i), 0) + 1);
+        }
+        for (int i = 0; i < t.length(); i++){
+            if (sMap.get(t.charAt(i)) == null || sMap.get(t.charAt(i)) == 0){
+                return false;
+            }
+            sMap.put(t.charAt(i), sMap.get(t.charAt(i)) - 1);
+        }
+        return true;
+    }
 }

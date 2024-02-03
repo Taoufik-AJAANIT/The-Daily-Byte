@@ -37,4 +37,14 @@ class HashMapsTest {
         assertEquals(hashMaps.jewelsAndStones("Af", "AaaddfFf"), 3);
         assertEquals(hashMaps.jewelsAndStones("AYOPD", "ayopd"), 0);
     }
+
+    @Test
+    @DisplayName("Valid Anagram")
+    void validAnagram() {
+        assertTrue(hashMaps.isValidAnagram("cat", "tac"));
+        assertTrue(hashMaps.isValidAnagram("caat", "taac"));
+        assertFalse(hashMaps.isValidAnagram("cat", "taac"));
+        assertTrue(hashMaps.isValidAnagram("listen", "silent"));
+        assertFalse(hashMaps.isValidAnagram("program", "function"));
+    }
 }
