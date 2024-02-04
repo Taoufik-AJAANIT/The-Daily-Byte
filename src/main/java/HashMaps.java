@@ -60,4 +60,17 @@ public class HashMaps {
         }
         return true;
     }
+
+    public int firstUniqueCharacter(String input) {
+        Map<Character, Integer> charactersMap = new HashMap<>();
+        for (int i = 0; i < input.length(); i++){
+            charactersMap.put(input.charAt(i), charactersMap.getOrDefault(input.charAt(i), 0) + 1);
+        }
+        for (int i = 0; i < input.length(); i++){
+            if (charactersMap.get(input.charAt(i)) == 1){
+                return i;
+            }
+        }
+        return -1;
+    }
 }

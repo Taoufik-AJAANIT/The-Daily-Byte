@@ -22,6 +22,7 @@ class HashMapsTest {
         assertFalse(hashMaps.twoSum(new int[]{3, 9, 13, 7}, 8));
         assertTrue(hashMaps.twoSum(new int[]{4, 2, 6, 5, 2}, 4));
     }
+
     @Test
     @DisplayName("Two Sum With Map")
     void twoSumWithMap() {
@@ -32,7 +33,7 @@ class HashMapsTest {
 
     @Test
     @DisplayName("Jewels and Stones")
-    void jewelsAndStones(){
+    void jewelsAndStones() {
         assertEquals(hashMaps.jewelsAndStones("abc", "ac"), 2);
         assertEquals(hashMaps.jewelsAndStones("Af", "AaaddfFf"), 3);
         assertEquals(hashMaps.jewelsAndStones("AYOPD", "ayopd"), 0);
@@ -46,5 +47,14 @@ class HashMapsTest {
         assertFalse(hashMaps.isValidAnagram("cat", "taac"));
         assertTrue(hashMaps.isValidAnagram("listen", "silent"));
         assertFalse(hashMaps.isValidAnagram("program", "function"));
+    }
+
+    @Test
+    @DisplayName("First Unique Character")
+    void firstUniqueCharacter() {
+        assertEquals(hashMaps.firstUniqueCharacter("abcabd"), 2);
+        assertEquals(hashMaps.firstUniqueCharacter("developer"), 0);
+        assertEquals(hashMaps.firstUniqueCharacter("thedailybyte"), 1);
+        assertEquals(hashMaps.firstUniqueCharacter("abccba"), -1);
     }
 }
