@@ -57,4 +57,26 @@ class HashMapsTest {
         assertEquals(hashMaps.firstUniqueCharacter("thedailybyte"), 1);
         assertEquals(hashMaps.firstUniqueCharacter("abccba"), -1);
     }
+    @Test
+    @DisplayName("Spot the Difference\n")
+    void spotTheDifference() {
+        assertEquals(hashMaps.spotTheDifference("foobar", "barfoot"), "t");
+        assertEquals(hashMaps.spotTheDifference("ide", "idea"), "a");
+        assertEquals(hashMaps.spotTheDifference("coding", "ingcod"), "");
+    }
+
+    @Test
+    @DisplayName("Intersection of Numbers")
+    void intersection() {
+        assertArrayEquals(new int[]{2, 4}, hashMaps.intersection(new int[]{2, 4, 4, 2}, new int[]{2, 4}));
+        assertArrayEquals(new int[]{3}, hashMaps.intersection(new int[]{1, 2, 3, 3}, new int[]{3, 3}));
+        assertArrayEquals(new int[]{}, hashMaps.intersection(new int[]{1, 3, 5, 7}, new int[]{2, 4, 6, 8}));
+    }
+    @Test
+    @DisplayName("Uncommon Words")
+    void uncommonWords() {
+        assertArrayEquals(new String[]{"the", "quick", "brown", "fox"}, hashMaps.uncommonWords("the quick", "brown fox"));
+        assertArrayEquals(new String[]{"beat", "lost", "to"}, hashMaps.uncommonWords("the tortoise beat the haire", "the tortoise lost to the haire"));
+        assertArrayEquals(new String[]{"copper", "hot"}, hashMaps.uncommonWords("copper coffee pot", "hot coffee pot"));
+    }
 }

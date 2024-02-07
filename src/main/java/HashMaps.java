@@ -1,7 +1,9 @@
 package main.java;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class HashMaps {
     public boolean twoSum(int[] array, int k) {
@@ -49,11 +51,11 @@ public class HashMaps {
 
     public boolean isValidAnagram(String s, String t) {
         Map<Character, Integer> sMap = new HashMap<>();
-        for (int i = 0; i < s.length(); i++){
+        for (int i = 0; i < s.length(); i++) {
             sMap.put(s.charAt(i), sMap.getOrDefault(s.charAt(i), 0) + 1);
         }
-        for (int i = 0; i < t.length(); i++){
-            if (sMap.get(t.charAt(i)) == null || sMap.get(t.charAt(i)) == 0){
+        for (int i = 0; i < t.length(); i++) {
+            if (sMap.get(t.charAt(i)) == null || sMap.get(t.charAt(i)) == 0) {
                 return false;
             }
             sMap.put(t.charAt(i), sMap.get(t.charAt(i)) - 1);
@@ -63,14 +65,65 @@ public class HashMaps {
 
     public int firstUniqueCharacter(String input) {
         Map<Character, Integer> charactersMap = new HashMap<>();
-        for (int i = 0; i < input.length(); i++){
+        for (int i = 0; i < input.length(); i++) {
             charactersMap.put(input.charAt(i), charactersMap.getOrDefault(input.charAt(i), 0) + 1);
         }
-        for (int i = 0; i < input.length(); i++){
-            if (charactersMap.get(input.charAt(i)) == 1){
+        for (int i = 0; i < input.length(); i++) {
+            if (charactersMap.get(input.charAt(i)) == 1) {
                 return i;
             }
         }
         return -1;
+    }
+
+    public String spotTheDifference(String s, String t) {
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
+        }
+        for (int i = 0; i < t.length(); i++) {
+            if (map.get(t.charAt(i)) == null || map.get(t.charAt(i)) == 0) {
+                return String.valueOf(t.charAt(i));
+            }
+            map.put(t.charAt(i), map.get(t.charAt(i)) - 1);
+        }
+        return "";
+    }
+
+    public int[] intersection(int[] ints, int[] ints1) {
+        ArrayList<Integer> result = new ArrayList<>();
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int anInt : ints) {
+            map.put(anInt, 1);
+        }
+        for (int j : ints1) {
+            if (map.getOrDefault(j, 0) > 0) {
+                result.add(j);
+                map.put(j, map.get(j) - 1);
+            }
+        }
+        return result.stream().mapToInt(i -> i).toArray();
+    }
+
+    public String[] uncommonWords(String s, String t) {
+        ArrayList<String> result = new ArrayList<>();
+        Map<String, Integer> smap = new HashMap<>();
+        Map<String, Integer> tmap = new HashMap<>();
+        for (String word : t.split(" ")) {
+            tmap.put(word, 1);
+        }
+        for (String word : s.split(" ")) {
+            smap.put(word, 1);
+            if (tmap.get(word) == null) {
+                result.add(word);
+            }
+        }
+        for (String word : t.split(" ")) {
+            if (smap.get(word) == null) {
+                result.add(word);
+            }
+        }
+        return result.toArray(new String[result.size()]);
     }
 }
