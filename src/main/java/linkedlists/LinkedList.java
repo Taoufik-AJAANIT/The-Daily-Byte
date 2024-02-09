@@ -9,6 +9,12 @@ public class LinkedList<T> {
         addNode(node, index);
     }
 
+    public void popFirst(){
+        if(head != null){
+            head = head.next;
+        }
+    }
+
     public void addNode(Node<T> node, int index) throws Exception {
         if (index == 0) {
             node.next = head;

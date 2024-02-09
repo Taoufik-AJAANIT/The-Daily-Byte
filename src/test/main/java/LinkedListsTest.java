@@ -75,4 +75,35 @@ class LinkedListsTest {
         result3.addLast(7);
         assertEquals(result3, this.linkedLists.merge(e, f));
     }
+
+    @Test
+    @DisplayName("Remove Nth to Last Node")
+    void removeNth() throws Exception {
+        LinkedList<Integer> a = new LinkedList();
+        a.addLast(1);
+        a.addLast(2);
+        a.addLast(3);
+        LinkedList<Integer> result1 = new LinkedList();
+        result1.addLast(1);
+        result1.addLast(2);
+        assertEquals(result1, this.linkedLists.removeNth(a, 1));
+
+        LinkedList<Integer> b = new LinkedList();
+        b.addLast(1);
+        b.addLast(2);
+        b.addLast(3);
+        LinkedList<Integer> result2 = new LinkedList();
+        result2.addLast(1);
+        result2.addLast(3);
+        assertEquals(result2, this.linkedLists.removeNth(b, 2));
+
+        LinkedList<Integer> result3 = new LinkedList();
+        result3.addLast(2);
+        result3.addLast(3);
+        LinkedList<Integer> c = new LinkedList();
+        c.addLast(1);
+        c.addLast(2);
+        c.addLast(3);
+        assertEquals(result3, this.linkedLists.removeNth(c, 3));
+    }
 }
