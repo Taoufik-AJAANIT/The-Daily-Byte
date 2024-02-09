@@ -60,9 +60,9 @@ class HashMapsTest {
     @Test
     @DisplayName("Spot the Difference\n")
     void spotTheDifference() {
-        assertEquals(hashMaps.spotTheDifference("foobar", "barfoot"), "t");
-        assertEquals(hashMaps.spotTheDifference("ide", "idea"), "a");
-        assertEquals(hashMaps.spotTheDifference("coding", "ingcod"), "");
+        assertEquals(hashMaps.spotTheDifference("foobar", "barfoot"), 't');
+        assertEquals(hashMaps.spotTheDifference("ide", "idea"), 'a');
+        assertEquals(hashMaps.spotTheDifference("coding", "ingcod"), ' ');
     }
 
     @Test
@@ -75,8 +75,9 @@ class HashMapsTest {
     @Test
     @DisplayName("Uncommon Words")
     void uncommonWords() {
-        assertArrayEquals(new String[]{"the", "quick", "brown", "fox"}, hashMaps.uncommonWords("the quick", "brown fox"));
-        assertArrayEquals(new String[]{"beat", "lost", "to"}, hashMaps.uncommonWords("the tortoise beat the haire", "the tortoise lost to the haire"));
-        assertArrayEquals(new String[]{"copper", "hot"}, hashMaps.uncommonWords("copper coffee pot", "hot coffee pot"));
+        assertArrayEquals(new String[]{"the", "quick", "brown", "fox"}, hashMaps.uncommonWords("brown fox", "the quick"));
+        assertArrayEquals(new String[]{"lost", "to", "beat"}, hashMaps.uncommonWords("the tortoise beat the haire", "the tortoise lost to the haire"));
+        assertArrayEquals(new String[]{"hot", "copper"}, hashMaps.uncommonWords("copper coffee pot", "hot coffee pot"));
+        assertArrayEquals(new String[]{"banana"}, hashMaps.uncommonWords("apple apple", "banana"));
     }
 }

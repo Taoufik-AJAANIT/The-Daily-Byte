@@ -3,7 +3,6 @@ package main.java;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class HashMaps {
     public boolean twoSum(int[] array, int k) {
@@ -50,6 +49,7 @@ public class HashMaps {
     }
 
     public boolean isValidAnagram(String s, String t) {
+        if(s.length() != t.length()) return false;
         Map<Character, Integer> sMap = new HashMap<>();
         for (int i = 0; i < s.length(); i++) {
             sMap.put(s.charAt(i), sMap.getOrDefault(s.charAt(i), 0) + 1);
@@ -76,18 +76,18 @@ public class HashMaps {
         return -1;
     }
 
-    public String spotTheDifference(String s, String t) {
+    public char spotTheDifference(String s, String t) {
         Map<Character, Integer> map = new HashMap<>();
         for (int i = 0; i < s.length(); i++) {
             map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
         }
         for (int i = 0; i < t.length(); i++) {
             if (map.get(t.charAt(i)) == null || map.get(t.charAt(i)) == 0) {
-                return String.valueOf(t.charAt(i));
+                return t.charAt(i);
             }
             map.put(t.charAt(i), map.get(t.charAt(i)) - 1);
         }
-        return "";
+        return ' ';
     }
 
     public int[] intersection(int[] ints, int[] ints1) {
@@ -111,16 +111,18 @@ public class HashMaps {
         Map<String, Integer> smap = new HashMap<>();
         Map<String, Integer> tmap = new HashMap<>();
         for (String word : t.split(" ")) {
-            tmap.put(word, 1);
+            tmap.put(word, tmap.getOrDefault(word, 0) + 1);
         }
         for (String word : s.split(" ")) {
-            smap.put(word, 1);
-            if (tmap.get(word) == null) {
+            smap.put(word, smap.getOrDefault(word, 0) + 1);
+        }
+        for (String word : t.split(" ")) {
+            if (smap.get(word) == null && tmap.get(word) == 1) {
                 result.add(word);
             }
         }
-        for (String word : t.split(" ")) {
-            if (smap.get(word) == null) {
+        for (String word : s.split(" ")) {
+            if (tmap.get(word) == null && smap.get(word) == 1) {
                 result.add(word);
             }
         }
