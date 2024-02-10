@@ -35,10 +35,11 @@ public class LinkedList<T> {
     }
 
     Node<T> get(int index) throws Exception {
-        if (index >= size()) throw new Exception("Out of Range");
         Node current = head;
-        for (int i = 0; i < index; i++) {
+        int position = 0;
+        while (position < index && current != null){
             current = current.next;
+            position++;
         }
         return current;
     }

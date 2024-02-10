@@ -53,6 +53,23 @@ public class LinkedLists {
         }
         return input;
     }
+
+    public LinkedList<Integer> removeValue(LinkedList<Integer> input, int value) throws Exception {
+        Node<Integer> iterator = input.get(0);
+        while (iterator != null && iterator.value == value){
+            input.popFirst();
+            iterator = input.get(0);
+        }
+        while (iterator != null){
+            if(iterator.next != null && iterator.next.value == value){
+                iterator.next = iterator.next.next;
+            }else {
+                iterator = iterator.next;
+            }
+        }
+        return input;
+
+    }
 }
 
 

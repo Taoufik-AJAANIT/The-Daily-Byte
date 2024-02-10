@@ -106,4 +106,38 @@ class LinkedListsTest {
         c.addLast(3);
         assertEquals(result3, this.linkedLists.removeNth(c, 3));
     }
+    @Test
+    @DisplayName("Remove Value")
+    void removeValue() throws Exception {
+        LinkedList<Integer> a = new LinkedList();
+        a.addLast(1);
+        a.addLast(2);
+        a.addLast(3);
+        LinkedList<Integer> result1 = new LinkedList();
+        result1.addLast(1);
+        result1.addLast(2);
+        assertEquals(result1, this.linkedLists.removeValue(a, 3));
+
+        LinkedList<Integer> b = new LinkedList();
+        b.addLast(8);
+        b.addLast(1);
+        b.addLast(1);
+        b.addLast(4);
+        b.addLast(12);
+        LinkedList<Integer> result2 = new LinkedList();
+        result2.addLast(8);
+        result2.addLast(4);
+        result2.addLast(12);
+        assertEquals(result2, this.linkedLists.removeValue(b, 1));
+        LinkedList<Integer> c = new LinkedList();
+        c.addLast(7);
+        c.addLast(12);
+        c.addLast(2);
+        c.addLast(9);
+        LinkedList<Integer> result3 = new LinkedList();
+        result3.addLast(12);
+        result3.addLast(2);
+        result3.addLast(9);
+        assertEquals(result3, this.linkedLists.removeValue(c, 7));
+    }
 }
