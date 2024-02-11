@@ -70,6 +70,21 @@ public class LinkedLists {
         return input;
 
     }
+
+    public int findMiddleElement(LinkedList<Integer> input) throws Exception {
+        int increment = 0;
+        Node<Integer> iteratorDouble = input.get(0);
+        Node<Integer> iterator = input.get(0);
+        while (iteratorDouble != null){
+            increment = increment + 1;
+            iteratorDouble = iteratorDouble.next;
+            if (increment == 2){
+                iterator = iterator.next;
+                increment = 0;
+            }
+        }
+        return iterator.value;
+    }
 }
 
 

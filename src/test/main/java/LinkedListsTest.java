@@ -140,4 +140,22 @@ class LinkedListsTest {
         result3.addLast(9);
         assertEquals(result3, this.linkedLists.removeValue(c, 7));
     }
+    @Test
+    @DisplayName("Find Middle Element")
+    void findMiddleElement() throws Exception {
+        LinkedList<Integer> a = new LinkedList();
+        a.addLast(1);
+        a.addLast(2);
+        a.addLast(3);
+        assertEquals(2, this.linkedLists.findMiddleElement(a));
+        LinkedList<Integer> b = new LinkedList();
+        b.addLast(1);
+        b.addLast(2);
+        b.addLast(3);
+        b.addLast(4);
+        assertEquals(3, this.linkedLists.findMiddleElement(b));
+        LinkedList<Integer> c = new LinkedList();
+        c.addLast(1);
+        assertEquals(1, this.linkedLists.findMiddleElement(c));
+    }
 }
