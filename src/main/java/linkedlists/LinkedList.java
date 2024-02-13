@@ -34,7 +34,7 @@ public class LinkedList<T> {
         this.add(value, size());
     }
 
-    Node<T> get(int index) throws Exception {
+    public Node<T> get(int index) throws Exception {
         Node current = head;
         int position = 0;
         while (position < index && current != null){

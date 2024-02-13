@@ -1,5 +1,9 @@
 package main.java.linkedlists;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 public class LinkedLists {
     public LinkedList merge(LinkedList<Integer> a, LinkedList<Integer> b) throws Exception {
         LinkedList result = new LinkedList();
@@ -56,14 +60,14 @@ public class LinkedLists {
 
     public LinkedList<Integer> removeValue(LinkedList<Integer> input, int value) throws Exception {
         Node<Integer> iterator = input.get(0);
-        while (iterator != null && iterator.value == value){
+        while (iterator != null && iterator.value == value) {
             input.popFirst();
             iterator = input.get(0);
         }
-        while (iterator != null){
-            if(iterator.next != null && iterator.next.value == value){
+        while (iterator != null) {
+            if (iterator.next != null && iterator.next.value == value) {
                 iterator.next = iterator.next.next;
-            }else {
+            } else {
                 iterator = iterator.next;
             }
         }
@@ -75,15 +79,38 @@ public class LinkedLists {
         int increment = 0;
         Node<Integer> iteratorDouble = input.get(0);
         Node<Integer> iterator = input.get(0);
-        while (iteratorDouble != null){
+        while (iteratorDouble != null) {
             increment = increment + 1;
             iteratorDouble = iteratorDouble.next;
-            if (increment == 2){
+            if (increment == 2) {
                 iterator = iterator.next;
                 increment = 0;
             }
         }
         return iterator.value;
+    }
+
+    public boolean containsCycle(LinkedList<Integer> a) throws Exception {
+        Map<Node<Integer>, Integer> map = new HashMap<>();
+        Node<Integer> iterator = a.get(0);
+        while (iterator != null) {
+            if (map.get(iterator) != null) return true;
+            map.put(iterator, 1);
+            iterator = iterator.next;
+        }
+        return false;
+    }
+    public boolean containsCycleTwoPointers(LinkedList<Integer> a) throws Exception {
+        Node<Integer> slow = a.get(0);
+        Node<Integer> fast = a.get(0);
+        while (fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if(slow == fast){
+                return true;
+            }
+        }
+        return false;
     }
 }
 

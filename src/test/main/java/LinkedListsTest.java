@@ -106,6 +106,7 @@ class LinkedListsTest {
         c.addLast(3);
         assertEquals(result3, this.linkedLists.removeNth(c, 3));
     }
+
     @Test
     @DisplayName("Remove Value")
     void removeValue() throws Exception {
@@ -140,6 +141,7 @@ class LinkedListsTest {
         result3.addLast(9);
         assertEquals(result3, this.linkedLists.removeValue(c, 7));
     }
+
     @Test
     @DisplayName("Find Middle Element")
     void findMiddleElement() throws Exception {
@@ -157,5 +159,44 @@ class LinkedListsTest {
         LinkedList<Integer> c = new LinkedList();
         c.addLast(1);
         assertEquals(1, this.linkedLists.findMiddleElement(c));
+    }
+
+    @Test
+    @DisplayName("Contains Cycle")
+    void containsCycle() throws Exception {
+        LinkedList<Integer> a = new LinkedList();
+        a.addLast(1);
+        a.addLast(2);
+        a.addLast(3);
+        a.get(2).next = a.get(0);
+        assertTrue(this.linkedLists.containsCycle(a));
+        LinkedList<Integer> b = new LinkedList();
+        b.addLast(1);
+        b.addLast(2);
+        b.addLast(3);
+        assertFalse(this.linkedLists.containsCycle(b));
+        LinkedList<Integer> c = new LinkedList();
+        c.addLast(1);
+        c.get(0).next = c.get(0);
+        assertTrue(this.linkedLists.containsCycle(c));
+    }
+    @Test
+    @DisplayName("Contains Cycle Fast Slow")
+    void containsCycleTwoPointers() throws Exception {
+        LinkedList<Integer> a = new LinkedList();
+        a.addLast(1);
+        a.addLast(2);
+        a.addLast(3);
+        a.get(2).next = a.get(0);
+        assertTrue(this.linkedLists.containsCycleTwoPointers(a));
+        LinkedList<Integer> b = new LinkedList();
+        b.addLast(1);
+        b.addLast(2);
+        b.addLast(3);
+        assertFalse(this.linkedLists.containsCycleTwoPointers(b));
+        LinkedList<Integer> c = new LinkedList();
+        c.addLast(1);
+        c.get(0).next = c.get(0);
+        assertTrue(this.linkedLists.containsCycleTwoPointers(c));
     }
 }
