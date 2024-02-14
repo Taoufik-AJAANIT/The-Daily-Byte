@@ -199,4 +199,57 @@ class LinkedListsTest {
         c.get(0).next = c.get(0);
         assertTrue(this.linkedLists.containsCycleTwoPointers(c));
     }
+    @Test
+    @DisplayName("Return Start of Cycle")
+    void getStartOfCycle() throws Exception {
+        LinkedList<Integer> a = new LinkedList();
+        a.addLast(1);
+        a.addLast(2);
+        a.addLast(3);
+        assertEquals(null, this.linkedLists.getStartOfCycle(a));
+        LinkedList<Integer> b = new LinkedList();
+        b.addLast(1);
+        b.addLast(2);
+        b.addLast(3);
+        b.addLast(4);
+        b.addLast(5);
+        b.get(4).next = b.get(1);
+        assertEquals(b.get(1), this.linkedLists.getStartOfCycle(b));
+        LinkedList<Integer> c = new LinkedList();
+        c.addLast(1);
+        c.addLast(9);
+        c.addLast(3);
+        c.addLast(7);
+        c.get(3).next = c.get(3);
+        assertEquals(c.get(3), this.linkedLists.getStartOfCycle(c));
+    }
+    @Test
+    @DisplayName("Reverse List")
+    void reverseList() throws Exception {
+        LinkedList<Integer> a = new LinkedList();
+        a.addLast(1);
+        a.addLast(2);
+        a.addLast(3);
+        LinkedList<Integer> result1 = new LinkedList();
+        result1.addLast(3);
+        result1.addLast(2);
+        result1.addLast(1);
+        assertEquals(result1, this.linkedLists.reverse(a));
+        LinkedList<Integer> b = new LinkedList();
+        b.addLast(7);
+        b.addLast(15);
+        b.addLast(9);
+        b.addLast(2);
+        LinkedList<Integer> result2 = new LinkedList();
+        result2.addLast(2);
+        result2.addLast(9);
+        result2.addLast(15);
+        result2.addLast(7);
+        assertEquals(result2, this.linkedLists.reverse(b));
+        LinkedList<Integer> c = new LinkedList();
+        c.addLast(1);
+        LinkedList<Integer> result3 = new LinkedList();
+        result3.addLast(1);
+        assertEquals(result3, this.linkedLists.reverse(c));
+    }
 }

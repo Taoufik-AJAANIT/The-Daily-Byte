@@ -2,7 +2,6 @@ package main.java.linkedlists;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class LinkedLists {
     public LinkedList merge(LinkedList<Integer> a, LinkedList<Integer> b) throws Exception {
@@ -111,6 +110,31 @@ public class LinkedLists {
             }
         }
         return false;
+    }
+
+    public Node getStartOfCycle(LinkedList<Integer> a) throws Exception {
+        Map<Node<Integer>, Integer> map = new HashMap<>();
+        Node<Integer> iterator = a.get(0);
+        while (iterator != null) {
+            if (map.get(iterator) != null) return iterator;
+            map.put(iterator, 1);
+            iterator = iterator.next;
+        }
+        return null;
+    }
+
+    public LinkedList<Integer> reverse(LinkedList<Integer> a) throws Exception {
+        Node<Integer> iterator = a.get(0);
+        Node<Integer> previous = null;
+        Node<Integer> next = iterator;
+        while (iterator != null){
+            iterator = iterator.next;
+            next.next = previous;
+            previous = next;
+            next = iterator;
+        }
+        a.head = previous;
+        return a;
     }
 }
 

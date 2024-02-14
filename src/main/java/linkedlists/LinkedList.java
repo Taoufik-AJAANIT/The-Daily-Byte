@@ -3,7 +3,7 @@ package main.java.linkedlists;
 import java.util.ArrayList;
 
 public class LinkedList<T> {
-    private Node<T> head;
+    public Node<T> head;
     public void add(T value, int index) throws Exception {
         Node<T> node = new Node<T>(value);
         addNode(node, index);
@@ -95,5 +95,9 @@ public class LinkedList<T> {
             current = current.next;
         }
         return size;
+    }
+
+    void clear(){
+        head = null;
     }
 }
