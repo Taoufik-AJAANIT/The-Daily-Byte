@@ -16,7 +16,6 @@ class StringsTest {
         strings = new Strings();
     }
 
-    ;
 
     @Test
     @DisplayName("Reverse String")

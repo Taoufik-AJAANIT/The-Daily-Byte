@@ -9,10 +9,13 @@ public class LinkedList<T> {
         addNode(node, index);
     }
 
-    public void popFirst(){
+    public T popFirst(){
         if(head != null){
+            T value = head.value;
             head = head.next;
+            return value;
         }
+        return null;
     }
 
     public void addNode(Node<T> node, int index) throws Exception {
