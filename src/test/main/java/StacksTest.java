@@ -25,4 +25,13 @@ class StacksTest {
         assertTrue(stacks.isValidCharacters("(({[]}))"));
         assertFalse(stacks.isValidCharacters("{(})"));
     }
+    @Test
+    @DisplayName("Compare Keystrokes")
+    void compareKeystrokes() throws Exception {
+        assertTrue(stacks.compareKeystrokes("ABC#", "CD##AB"));
+        assertTrue(stacks.compareKeystrokes("como#pur#ter", "computer"));
+        assertFalse(stacks.compareKeystrokes("cof#dim#ng", "code"));
+        assertTrue(stacks.compareKeystrokes("y#fo##f", "y#f#o##f"));
+
+    }
 }

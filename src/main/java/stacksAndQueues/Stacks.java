@@ -21,4 +21,29 @@ public class Stacks {
         }
         return stack.isEmpty();
     }
+
+    public boolean compareKeystrokes(String s, String t) throws Exception {
+        Stack<Character> stackS = new Stack<>();
+        Stack<Character> stackT = new Stack<>();
+        for (char c : s.toCharArray()) {
+            if (c == '#' && !stackS.isEmpty()) {
+                stackS.pop();
+            }  else if(c != '#') {
+                stackS.push(c);
+            }
+        }
+        for (char c : t.toCharArray()) {
+            if (c == '#' && !stackT.isEmpty()) {
+                stackT.pop();
+            } else if(c != '#') {
+                stackT.push(c);
+            }
+        }
+        while (!stackS.isEmpty() && !stackT.isEmpty()) {
+            if (stackS.pop() != stackT.pop()) {
+                return false;
+            }
+        }
+        return stackT.isEmpty() && stackS.isEmpty();
+    }
 }
