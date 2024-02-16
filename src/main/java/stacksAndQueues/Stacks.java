@@ -19,6 +19,6 @@ public class Stacks {
                 }
             }
         }
-        return true;
+        return stack.isEmpty();
     }
 }

@@ -20,6 +20,8 @@ class StacksTest {
     @DisplayName("Validate Characters")
     void checkIfIsPalindrome() throws Exception {
         assertTrue(stacks.isValidCharacters("(){}[]"));
+        assertFalse(stacks.isValidCharacters("(){}[])"));
+        assertFalse(stacks.isValidCharacters("(){}[]("));
         assertTrue(stacks.isValidCharacters("(({[]}))"));
         assertFalse(stacks.isValidCharacters("{(})"));
     }

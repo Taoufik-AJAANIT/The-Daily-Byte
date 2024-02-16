@@ -16,4 +16,8 @@ public class Stack<T> {
     public void push(T item) throws Exception {
         this.list.addFirst(item);
     }
+
+    public boolean isEmpty(){
+        return this.list.size() == 0;
+    }
 }

@@ -90,7 +90,7 @@ public class LinkedList<T> {
         return result.toString();
     }
 
-    int size(){
+    public int size(){
         Node<T> current = head;
         int size = 0;
         while (current != null){
