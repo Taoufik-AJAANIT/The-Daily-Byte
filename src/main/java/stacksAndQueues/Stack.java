@@ -9,6 +9,13 @@ public class Stack<T> {
         this.list = new LinkedList<>();
     }
 
+    public T peek(){
+        if(this.list.head != null){
+            return this.list.head.value;
+        }
+        return null;
+    }
+
     public T pop() {
         return this.list.popFirst();
     }

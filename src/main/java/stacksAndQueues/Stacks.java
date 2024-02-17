@@ -46,4 +46,20 @@ public class Stacks {
         }
         return stackT.isEmpty() && stackS.isEmpty();
     }
+
+    public String removeAdjacentDuplicates(String s) throws Exception {
+        Stack<Character> stack = new Stack<>();
+        for (char c : s.toCharArray()) {
+            if (stack.peek() != null && c == stack.peek()) {
+                stack.pop();
+            } else{
+                stack.push(c);
+            }
+        }
+        String result = "";
+        while (!stack.isEmpty()){
+            result = stack.pop() + result;
+        }
+        return result;
+    }
 }
