@@ -44,4 +44,12 @@ class StacksTest {
         assertEquals("ca", stacks.removeAdjacentDuplicates("abbaca"));
 
     }
+
+    @Test
+    @DisplayName("Greater Elements")
+    void greaterElements() throws Exception {
+        assertArrayEquals(new int[]{-1, 3, -1}, stacks.greaterElements(new int[]{4,1,2}, new int[]{1,3,4,2}));
+        assertArrayEquals(new int[]{3, -1}, stacks.greaterElements(new int[]{2,4}, new int[]{1,2,3,4}));
+        assertArrayEquals(new int[]{7,7,7,7,7}, stacks.greaterElements(new int[]{1,3,5,2,4}, new int[]{6,5,4,3,2,1,7}));
+    }
 }
