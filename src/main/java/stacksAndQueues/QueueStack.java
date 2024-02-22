@@ -2,19 +2,14 @@ package main.java.stacksAndQueues;
 
 public class QueueStack<T> {
     private Queue<T> queue;
-    private Queue<T> transitionQueue;
-
     public QueueStack(){
         this.queue = new Queue<>();
-        this.transitionQueue = new Queue<>();
     }
     public void push(T item) throws Exception {
-        while (!queue.isEmpty()){
-            transitionQueue.add(queue.remove());
-        }
+        int size = queue.size;
         queue.add(item);
-        while (!transitionQueue.isEmpty()){
-            queue.add(transitionQueue.remove());
+        for (int i = 0; i < size; i++){
+            queue.add(queue.remove());
         }
     }
     public T pop(){

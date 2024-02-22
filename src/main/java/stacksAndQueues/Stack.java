@@ -24,6 +24,10 @@ public class Stack<T> {
         this.list.addFirst(item);
     }
 
+    public int size(){
+        return this.list.size();
+    }
+
     public boolean isEmpty(){
         return this.list.size() == 0;
     }

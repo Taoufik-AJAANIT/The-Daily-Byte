@@ -2,26 +2,26 @@ package main.java.stacksAndQueues;
 
 public class StackQueue<T> {
     private Stack<T> stack;
-    private Stack<T> transitionStack;
 
-    public StackQueue(){
+    public StackQueue() {
         this.stack = new Stack<>();
-        this.transitionStack = new Stack<>();
     }
+
     public void push(T item) throws Exception {
-        while (!stack.isEmpty()){
-            transitionStack.push(stack.pop());
+        if(stack.size() == 0){
+            stack.push(item);
+            return ;
         }
-        stack.push(item);
-        while (!transitionStack.isEmpty()){
-            stack.push(transitionStack.pop());
-        }
+        T latsItem = stack.pop();
+        this.push(item);
+        stack.push(latsItem);
     }
-    public T pop(){
+
+    public T pop() {
         return stack.pop();
     }
 
     public T peek(){
-        return stack.peek();
+       return stack.peek();
     }
 }
