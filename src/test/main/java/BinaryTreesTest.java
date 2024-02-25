@@ -78,15 +78,15 @@ class BinaryTreesTest {
     }
 
     @Test
-    @DisplayName("Lowest Common Ancestor")
-    void lowestCommonAncestor() throws Exception {
+    @DisplayName("Lowest Common Ancestor Binary Search Tree")
+    void lowestCommonAncestorBST() throws Exception {
         Node root = new Node(7);
         root.left = new Node(2);
         root.left.left = new Node(1);
         root.left.right = new Node(5);
         root.right = new Node(9);
 
-        assertEquals(root, this.binaryTrees.lowestCommonAncestor(root, 1, 9));
+        assertEquals(root, this.binaryTrees.lowestCommonAncestorBST(root, 1, 9));
 
         Node root2 = new Node(8);
         root2.left = new Node(3);
@@ -94,13 +94,40 @@ class BinaryTreesTest {
         root2.left.right = new Node(6);
         root2.right = new Node(9);
 
-        assertEquals(root2.left, this.binaryTrees.lowestCommonAncestor(root2, 2, 6));
+        assertEquals(root2.left, this.binaryTrees.lowestCommonAncestorBST(root2, 2, 6));
 
         Node root3 = new Node(8);
         root3.left = new Node(6);
         root3.right = new Node(9);
 
-        assertEquals(root3, this.binaryTrees.lowestCommonAncestor(root3, 6, 8));
+        assertEquals(root3, this.binaryTrees.lowestCommonAncestorBST(root3, 6, 8));
+
+    }
+
+    @Test
+    @DisplayName("Lowest Common Ancestor Binary  Tree")
+    void lowestCommonAncestorBT() throws Exception {
+        Node root = new Node(7);
+        root.left = new Node(2);
+        root.left.left = new Node(1);
+        root.left.right = new Node(5);
+        root.right = new Node(9);
+
+        assertEquals(root, this.binaryTrees.lowestCommonAncestorBT(root, root.left.left, root.right));
+
+        Node root2 = new Node(8);
+        root2.left = new Node(3);
+        root2.left.left = new Node(2);
+        root2.left.right = new Node(6);
+        root2.right = new Node(9);
+
+        assertEquals(root2.left, this.binaryTrees.lowestCommonAncestorBT(root2, root2.left.left, root2.left.right));
+
+        Node root3 = new Node(8);
+        root3.left = new Node(6);
+        root3.right = new Node(9);
+
+        assertEquals(root3, this.binaryTrees.lowestCommonAncestorBT(root3, root3.left, root3));
 
     }
 
