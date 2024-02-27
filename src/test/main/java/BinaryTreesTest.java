@@ -131,4 +131,61 @@ class BinaryTreesTest {
 
     }
 
+    @Test
+    @DisplayName("Identical Trees")
+    void identicalTrees() throws Exception {
+        Node root = new Node(2);
+        root.left = new Node(1);
+        root.right = new Node(3);
+
+        Node root2 = new Node(2);
+        root2.left = new Node(1);
+        root2.right = new Node(3);
+
+        assertTrue(this.binaryTrees.identicalTrees(root, root2));
+
+        Node root3 = new Node(1);
+        root3.right = new Node(9);
+        root3.right.right = new Node(18);
+        Node root4 = new Node(1);
+        root4.left = new Node(9);
+        root4.left.right = new Node(18);
+
+        assertFalse(this.binaryTrees.identicalTrees(root3, root4));
+
+        Node root5 = new Node(2);
+        root5.right = new Node(1);
+        root5.left = new Node(3);
+        Node root6 = new Node(2);
+        root6.left = new Node(1);
+        root6.right = new Node(3);
+
+        assertFalse(this.binaryTrees.identicalTrees(root5, root6));
+
+
+    }
+
+    @Test
+    @DisplayName("Minimum Difference")
+    void minimumDifference() throws Exception {
+        Node root = new Node(2);
+        root.left = new Node(1);
+        root.right = new Node(3);
+        assertEquals(1, this.binaryTrees.minimumDifference(root));
+
+        Node root2 = new Node(29);
+        root2.left = new Node(17);
+        root2.left.left = new Node(1);
+        root2.right = new Node(50);
+        root2.right.left = new Node(42);
+        root2.right.right = new Node(59);
+        assertEquals(8, this.binaryTrees.minimumDifference(root2));
+
+        Node root3 = new Node(2);
+        root3.right = new Node(100);
+
+        assertEquals(98, this.binaryTrees.minimumDifference(root3));
+
+    }
+
 }

@@ -76,4 +76,23 @@ public class BinaryTrees<T extends Comparable<T>> {
         }
         return node;
     }
+
+    public boolean identicalTrees(Node root1, Node root2) {
+        if (root1 == null && root2 == null) return true;
+        if (root1 != null && root2 != null) {
+            return root1.value == root2.value
+                    && identicalTrees(root1.left, root2.left)
+                    && identicalTrees(root1.right, root2.right);
+        }
+        return false;
+    }
+
+    public int minimumDifference(Node<Integer> root) {
+        if (root == null) return Integer.MAX_VALUE;
+        int leftDifference = root.left != null ? root.value - ((Integer) root.left.value) : Integer.MAX_VALUE;
+        int rightDifference = root.right != null ? ((Integer) root.right.value) - root.value : Integer.MAX_VALUE;
+        return Math.min(Math.min(Math.min(leftDifference, rightDifference), minimumDifference(root.left)), minimumDifference(root.right));
+
+
+    }
 }
