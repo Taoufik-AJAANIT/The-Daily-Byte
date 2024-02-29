@@ -187,5 +187,24 @@ class BinaryTreesTest {
         assertEquals(98, this.binaryTrees.minimumDifference(root3));
 
     }
+    @Test
+    @DisplayName("Mode")
+    void mode() throws Exception {
+        Node root = new Node(2);
+        root.left = new Node(1);
+        root.right = new Node(2);
+        assertEquals(2, this.binaryTrees.mode(root));
+
+        Node root2 = new Node(7);
+        root2.left = new Node(4);
+        root2.left.left = new Node(1);
+        root2.left.right = new Node(4);
+        root2.right = new Node(9);
+        root2.right.left = new Node(8);
+        root2.right.right = new Node(9);
+        root2.right.right.right = new Node(9);
+        assertEquals(9, this.binaryTrees.mode(root2));
+
+    }
 
 }

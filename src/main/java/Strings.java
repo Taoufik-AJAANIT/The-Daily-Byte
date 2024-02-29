@@ -54,7 +54,7 @@ public class Strings {
             return true;
         }
         return Character.toUpperCase(input.charAt(0)) == input.charAt(0)
-                && input.substring(1, input.length() - 1).toLowerCase().equals(input.substring(1, input.length() - 1));
+                && input.substring(1, input.length()).toLowerCase().equals(input.substring(1, input.length()));
     }
 
     public String addBinary(String a, String b) {

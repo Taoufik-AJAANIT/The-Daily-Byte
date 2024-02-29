@@ -48,6 +48,7 @@ class StringsTest {
         assertTrue(strings.isCorrectlyCapitalized("Calvin"));
         assertFalse(strings.isCorrectlyCapitalized("compUter"));
         assertTrue(strings.isCorrectlyCapitalized("coding"));
+        assertFalse(strings.isCorrectlyCapitalized("FlaG"));
     }
 
     @Test

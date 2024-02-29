@@ -1,6 +1,9 @@
 package main.java.trees.binaryTree;
 
+import main.java.HashMaps;
 import main.java.linkedlists.LinkedList;
+
+import java.util.HashMap;
 
 public class BinaryTrees<T extends Comparable<T>> {
     public Node find(T value, Node<T> root) {
@@ -94,5 +97,28 @@ public class BinaryTrees<T extends Comparable<T>> {
         return Math.min(Math.min(Math.min(leftDifference, rightDifference), minimumDifference(root.left)), minimumDifference(root.right));
 
 
+    }
+
+    public int[] mode(Node<Integer> root) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        HashMap<Integer, Integer> max = new HashMap<>();
+        max.put(-1, 0);
+        modeRecc(root, map, max);
+        return  max.entrySet()
+                .stream()
+                .map(entry -> entry.getKey())
+                .mapToInt(i -> i)
+                .toArray();
+    }
+
+    public void modeRecc(Node<Integer> root, HashMap<Integer, Integer> map, HashMap<Integer, Integer> max) {
+        if (root == null) return;
+        map.put(root.value, map.getOrDefault(root.value, 0) + 1);
+        if ((int) max.values().toArray()[0] < map.get(root.value)) {
+            max.clear();
+            max.put(root.value, map.get(root.value));
+        }
+        modeRecc(root.left, map, max);
+        modeRecc(root.right, map, max);
     }
 }
