@@ -187,6 +187,7 @@ class BinaryTreesTest {
         assertEquals(98, this.binaryTrees.minimumDifference(root3));
 
     }
+
     @Test
     @DisplayName("Mode")
     void mode() throws Exception {
@@ -204,6 +205,49 @@ class BinaryTreesTest {
         root2.right.right = new Node(9);
         root2.right.right.right = new Node(9);
         assertEquals(9, this.binaryTrees.mode(root2));
+
+    }
+
+    @Test
+    @DisplayName("Gather Levels")
+    void gatherLevels() throws Exception {
+        Node root = new Node(4);
+        root.left = new Node(2);
+        root.right = new Node(7);
+        assertArrayEquals(new int[][]{{4}, {2, 7}}, this.binaryTrees.gatherLevels(root));
+
+        Node root1 = new Node(2);
+        root1.left = new Node(10);
+        root1.right = new Node(15);
+        root1.right.right = new Node(20);
+        assertArrayEquals(new int[][]{{2}, {10, 15}, {20}}, this.binaryTrees.gatherLevels(root1));
+
+        Node root3 = new Node(1);
+        root3.left = new Node(9);
+        root3.left.left = new Node(3);
+        root3.right = new Node(32);
+        root3.right.right = new Node(78);
+        assertArrayEquals(new int[][]{{1}, {9, 32}, {3, 78}}, this.binaryTrees.gatherLevels(root3));
+
+    }
+
+    @Test
+    @DisplayName("Max Value in Each Level")
+    void maxValueInEachLevel() throws Exception {
+        Node root = new Node(2);
+        root.left = new Node(10);
+        root.right = new Node(15);
+        root.right.right = new Node(20);
+        assertArrayEquals(new int[]{2, 15, 20}, this.binaryTrees.maxValueInEachLevel(root));
+
+        Node root2 = new Node(1);
+        root2.left = new Node(5);
+        root2.right = new Node(6);
+        root2.right.right = new Node(7);
+        root2.left.left = new Node(5);
+        root2.left.right = new Node(3);
+        assertArrayEquals(new int[]{1, 6, 7}, this.binaryTrees.maxValueInEachLevel(root2));
+
 
     }
 

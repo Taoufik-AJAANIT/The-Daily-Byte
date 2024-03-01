@@ -1,9 +1,9 @@
 package main.java.trees.binaryTree;
 
-import main.java.HashMaps;
 import main.java.linkedlists.LinkedList;
+import main.java.stacksAndQueues.Queue;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class BinaryTrees<T extends Comparable<T>> {
     public Node find(T value, Node<T> root) {
@@ -95,20 +95,15 @@ public class BinaryTrees<T extends Comparable<T>> {
         int leftDifference = root.left != null ? root.value - ((Integer) root.left.value) : Integer.MAX_VALUE;
         int rightDifference = root.right != null ? ((Integer) root.right.value) - root.value : Integer.MAX_VALUE;
         return Math.min(Math.min(Math.min(leftDifference, rightDifference), minimumDifference(root.left)), minimumDifference(root.right));
-
-
     }
 
-    public int[] mode(Node<Integer> root) {
+    public int mode(Node<Integer> root) {
         HashMap<Integer, Integer> map = new HashMap<>();
         HashMap<Integer, Integer> max = new HashMap<>();
         max.put(-1, 0);
         modeRecc(root, map, max);
-        return  max.entrySet()
-                .stream()
-                .map(entry -> entry.getKey())
-                .mapToInt(i -> i)
-                .toArray();
+        return (int) max.keySet().toArray()[0];
+
     }
 
     public void modeRecc(Node<Integer> root, HashMap<Integer, Integer> map, HashMap<Integer, Integer> max) {
@@ -120,5 +115,61 @@ public class BinaryTrees<T extends Comparable<T>> {
         }
         modeRecc(root.left, map, max);
         modeRecc(root.right, map, max);
+    }
+
+    public int[][] gatherLevels(Node<Integer> root) throws Exception {
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(Arrays.asList(root.value));
+        Map currentLevel = nextLevel(Arrays.asList(root));
+        while (currentLevel.get("values") != null) {
+            result.add(result.size(), (List<Integer>) currentLevel.get("values"));
+            currentLevel = nextLevel((List) currentLevel.get("nodes"));
+        }
+        return result.stream()
+                .map(ls -> ls.stream().mapToInt(a -> a).toArray())
+                .toArray(int[][]::new);
+
+    }
+
+    private Map<String, List> nextLevel(List<Node<Integer>> level) {
+        List<Integer> values = new ArrayList<>();
+        List<Node> nodes = new ArrayList<>();
+        for (Node root : level) {
+            if (root.left != null) {
+                values.add((Integer) root.left.value);
+                nodes.add(root.left);
+            }
+            if (root.right != null) {
+                values.add((Integer) root.right.value);
+                nodes.add(root.right);
+            }
+        }
+        Map map = new HashMap<>();
+        if (nodes.size() > 0) {
+            map.put("nodes", nodes);
+            map.put("values", values);
+        }
+        return map;
+    }
+
+    public int[] maxValueInEachLevel(Node root) throws Exception {
+        List result = new ArrayList<>();
+        Queue<Node<Integer>> queue = new Queue();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int n = queue.size;
+            int max = Integer.MIN_VALUE;
+            while (n > 0) {
+                Node<Integer> node = queue.remove();
+                if (node.value > max) {
+                    max = node.value;
+                }
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+                n--;
+            }
+            result.add(max);
+        }
+        return result.stream().mapToInt(a -> (int) a).toArray();
     }
 }
