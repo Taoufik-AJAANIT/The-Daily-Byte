@@ -4,6 +4,7 @@ import main.java.linkedlists.LinkedList;
 import main.java.trees.binaryTree.BinaryTrees;
 import main.java.trees.binaryTree.Node;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -231,7 +232,7 @@ class BinaryTreesTest {
 
     }
 
-    @Test
+    @Test()
     @DisplayName("Max Value in Each Level")
     void maxValueInEachLevel() throws Exception {
         Node root = new Node(2);
@@ -248,6 +249,68 @@ class BinaryTreesTest {
         root2.left.right = new Node(3);
         assertArrayEquals(new int[]{1, 6, 7}, this.binaryTrees.maxValueInEachLevel(root2));
 
+
+    }
+
+    @Test()
+    @DisplayName("Visible Values")
+    void visibleValues() throws Exception {
+        Node root = new Node(4);
+        root.left = new Node(2);
+        root.right = new Node(7);
+        assertArrayEquals(new int[]{4, 2}, this.binaryTrees.visibleValues(root));
+
+        Node root2 = new Node(7);
+        root2.left = new Node(4);
+        root2.right = new Node(9);
+        root2.right.left = new Node(8);
+        root2.right.right = new Node(9);
+        root2.right.right.right = new Node(9);
+        root2.left.left = new Node(1);
+        root2.left.right = new Node(4);
+        assertArrayEquals(new int[]{7, 4, 1, 9}, this.binaryTrees.visibleValues(root2));
+
+
+    }
+
+    @Test
+    @DisplayName("Gather Levels Bottom Up")
+    void gatherLevelsBottomUp() throws Exception {
+        Node root = new Node(4);
+        root.left = new Node(2);
+        root.right = new Node(7);
+        assertArrayEquals(new int[][]{{2, 7}, {4}}, this.binaryTrees.gatherLevelsBottomUp(root));
+
+        Node root1 = new Node(2);
+        root1.left = new Node(10);
+        root1.right = new Node(15);
+        root1.right.right = new Node(20);
+        assertArrayEquals(new int[][]{{20}, {10, 15}, {2}}, this.binaryTrees.gatherLevelsBottomUp(root1));
+
+        Node root3 = new Node(1);
+        root3.left = new Node(9);
+        root3.left.left = new Node(3);
+        root3.right = new Node(32);
+        root3.right.right = new Node(78);
+        assertArrayEquals(new int[][]{{3, 78}, {9, 32}, {1}}, this.binaryTrees.gatherLevelsBottomUp(root3));
+
+    }
+    @Test
+    @DisplayName("Zig Zag Traversal")
+    void zigZagTraversal() throws Exception {
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        assertArrayEquals(new int[][]{{1}, {3, 2}}, this.binaryTrees.zigZagTraversal(root));
+
+        Node root1 = new Node(8);
+        root1.left = new Node(2);
+        root1.right = new Node(29);
+        root1.right.right = new Node(9);
+        root1.right.left = new Node(3);
+        root1.left.right = new Node(10);
+        root1.left.left = new Node(1);
+        assertArrayEquals(new int[][]{{8}, {29, 2}, {1, 10, 3, 9}}, this.binaryTrees.zigZagTraversal(root1));
 
     }
 

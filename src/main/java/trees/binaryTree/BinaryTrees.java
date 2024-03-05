@@ -4,6 +4,7 @@ import main.java.linkedlists.LinkedList;
 import main.java.stacksAndQueues.Queue;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class BinaryTrees<T extends Comparable<T>> {
     public Node find(T value, Node<T> root) {
@@ -171,5 +172,87 @@ public class BinaryTrees<T extends Comparable<T>> {
             result.add(max);
         }
         return result.stream().mapToInt(a -> (int) a).toArray();
+    }
+
+    public int[] visibleValues(Node root) throws Exception {
+        List result = new ArrayList<>();
+        Queue<Node<Integer>> queue = new Queue();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int currentLevelSize = queue.size;
+            int n = currentLevelSize;
+            while (n > 0) {
+                Node<Integer> node = queue.remove();
+                if (n == currentLevelSize) {
+                    result.add(node.value);
+                }
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+                n--;
+            }
+        }
+        return result.stream().mapToInt(a -> (int) a).toArray();
+    }
+
+    public int[][] gatherLevelsBottomUp(Node<Integer> root) throws Exception {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) return null;
+        gatherLevelsBottomUpRec((new ArrayList<>(Arrays.asList(root))), result);
+        return result.stream()
+                .map(ls -> ls.stream().mapToInt(a -> a).toArray())
+                .toArray(int[][]::new);
+
+    }
+
+    public void gatherLevelsBottomUpRec(List<Node<Integer>> nodes, List<List<Integer>> result) throws Exception {
+        if (nodes.size() == 0) return;
+        List<Integer> level = new ArrayList<>();
+        gatherLevelsBottomUpRec((List) nodes.stream().map(node -> {
+            List childs = new ArrayList();
+            level.add(node.value);
+            if (node.left != null) {
+                childs.add(node.left);
+            }
+            if (node.right != null) {
+                childs.add(node.right);
+            }
+            return childs;
+        }).flatMap(List::stream).collect(Collectors.toList()), result);
+        result.add(level);
+    }
+
+    public int[][] zigZagTraversal(Node<Integer> root) throws Exception {
+        if (root == null) return null;
+        List<List<Integer>> result = new ArrayList<>();
+        zigZagTraversalRec((new ArrayList<>(Arrays.asList(root))), result, 0);
+        return result.stream()
+                .map(ls -> ls.stream().mapToInt(a -> a).toArray())
+                .toArray(int[][]::new);
+    }
+
+    public void zigZagTraversalRec(List<Node<Integer>> nodes, List<List<Integer>> result, int level) throws Exception {
+        if (nodes.size() == 0) return;
+        List<Integer> currentLevel = new ArrayList<>();
+        List<Node<Integer>> nextLevel = new ArrayList<>();
+        nodes.stream().forEach(node -> {
+            currentLevel.add(node.value);
+            if (level % 2 == 0) {
+                if (node.left != null) {
+                    nextLevel.add(0, node.left);
+                }
+                if (node.right != null) {
+                    nextLevel.add(0, node.right);
+                }
+            } else {
+                if (node.right != null) {
+                    nextLevel.add(0, node.right);
+                }
+                if (node.left != null) {
+                    nextLevel.add(0, node.left);
+                }
+            }
+        });
+        result.add(currentLevel);
+        zigZagTraversalRec(nextLevel, result, level + 1);
     }
 }
