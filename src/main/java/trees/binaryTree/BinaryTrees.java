@@ -266,15 +266,15 @@ public class BinaryTrees<T extends Comparable<T>> {
                 .toArray(int[][]::new);
     }
 
-    private void gatherColumnsRec(Node<Integer> root, List<List<Integer>> leftResult, List<List<Integer>> rightResult, int level){
-        if(root == null) return;
-        if(level < 0) {
-            if(leftResult.size() == (Math.abs(level) - 1)){
+    private void gatherColumnsRec(Node<Integer> root, List<List<Integer>> leftResult, List<List<Integer>> rightResult, int level) {
+        if (root == null) return;
+        if (level < 0) {
+            if (leftResult.size() == (Math.abs(level) - 1)) {
                 leftResult.add(0, new ArrayList<>());
             }
             leftResult.get(leftResult.size() - Math.abs(level)).add(root.value);
-        }else {
-            if(rightResult.size() == level) {
+        } else {
+            if (rightResult.size() == level) {
                 rightResult.add(new ArrayList<>());
             }
             rightResult.get(level).add(root.value);
@@ -283,4 +283,53 @@ public class BinaryTrees<T extends Comparable<T>> {
         gatherColumnsRec(root.right, leftResult, rightResult, level + 1);
 
     }
+
+
+/*
+  //Gather N-ary Tree Levels (executed directly on leetcode https://leetcode.com/problems/n-ary-tree-level-order-traversal/)
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+
+
+    class Solution {
+        public List<List<Integer>> levelOrder(Node root) {
+            List<List<Integer>> result = new ArrayList<>();
+            if (root == null)
+                return result;
+            levelOrderRecc(root, result, 0);
+            return result;
+        }
+
+        private void levelOrderRecc(Node root, List<List<Integer>> result, int level){
+            if(root == null){
+                return;
+            }
+
+            if(result.size() == level){
+                result.add(new ArrayList<>());
+            }
+            result.get(level).add(root.val);
+            if(root.children != null){
+                root.children.stream().forEach(child -> {
+                    levelOrderRecc(child, result, level + 1);
+                });
+            }
+        }
+    }
+
+ */
 }
