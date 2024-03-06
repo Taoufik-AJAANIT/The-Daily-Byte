@@ -295,6 +295,7 @@ class BinaryTreesTest {
         assertArrayEquals(new int[][]{{3, 78}, {9, 32}, {1}}, this.binaryTrees.gatherLevelsBottomUp(root3));
 
     }
+
     @Test
     @DisplayName("Zig Zag Traversal")
     void zigZagTraversal() throws Exception {
@@ -311,6 +312,27 @@ class BinaryTreesTest {
         root1.left.right = new Node(10);
         root1.left.left = new Node(1);
         assertArrayEquals(new int[][]{{8}, {29, 2}, {1, 10, 3, 9}}, this.binaryTrees.zigZagTraversal(root1));
+
+    }
+
+    @Test
+    @DisplayName("Gather Columns")
+    void gatherColumns() throws Exception {
+        Node root = new Node(8);
+        root.left = new Node(2);
+        root.right = new Node(29);
+        root.right.left = new Node(3);
+        root.right.right = new Node(9);
+        assertArrayEquals(new int[][]{{2}, {8, 3}, {29}, {9}}, this.binaryTrees.gatherColumns(root));
+
+        Node root1 = new Node(100);
+        root1.left = new Node(53);
+        root1.right = new Node(78);
+        root1.right.right = new Node(20);
+        root1.right.left = new Node(9);
+        root1.left.right = new Node(3);
+        root1.left.left = new Node(32);
+        assertArrayEquals(new int[][]{{32}, {53}, {100, 3, 9}, {78}, {20}}, this.binaryTrees.gatherColumns(root1));
 
     }
 

@@ -255,4 +255,32 @@ public class BinaryTrees<T extends Comparable<T>> {
         result.add(currentLevel);
         zigZagTraversalRec(nextLevel, result, level + 1);
     }
+
+    public int[][] gatherColumns(Node root) {
+        List<List<Integer>> leftResult = new ArrayList<>();
+        List<List<Integer>> rightResult = new ArrayList<>();
+        gatherColumnsRec(root, leftResult, rightResult, 0);
+        leftResult.addAll(rightResult);
+        return leftResult.stream()
+                .map(ls -> ls.stream().mapToInt(a -> a).toArray())
+                .toArray(int[][]::new);
+    }
+
+    private void gatherColumnsRec(Node<Integer> root, List<List<Integer>> leftResult, List<List<Integer>> rightResult, int level){
+        if(root == null) return;
+        if(level < 0) {
+            if(leftResult.size() == (Math.abs(level) - 1)){
+                leftResult.add(0, new ArrayList<>());
+            }
+            leftResult.get(leftResult.size() - Math.abs(level)).add(root.value);
+        }else {
+            if(rightResult.size() == level) {
+                rightResult.add(new ArrayList<>());
+            }
+            rightResult.get(level).add(root.value);
+        }
+        gatherColumnsRec(root.left, leftResult, rightResult, level - 1);
+        gatherColumnsRec(root.right, leftResult, rightResult, level + 1);
+
+    }
 }

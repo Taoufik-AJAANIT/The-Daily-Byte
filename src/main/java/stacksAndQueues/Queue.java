@@ -23,7 +23,7 @@ public class Queue<T> {
         return null;
     }
 
-    public void add(T item) throws Exception {
+    public void add(T item) {
         Node<T> tail = new Node<>(item);
         if (this.head == null) {
             this.tail = tail;
