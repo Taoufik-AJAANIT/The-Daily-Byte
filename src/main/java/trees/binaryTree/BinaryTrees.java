@@ -284,6 +284,32 @@ public class BinaryTrees<T extends Comparable<T>> {
 
     }
 
+    public int calculateDepth(Node root) {
+        if (root == null) return 0;
+        return 1 + Math.max(calculateDepth(root.left), calculateDepth(root.right));
+    }
+
+    public String[] rootToLeafPaths(Node<Integer> root) {
+        if(root == null) return null;
+        List<String> result = new ArrayList();
+        rootToLeafPathsRec(root, "", result);
+        return result.toArray(new String[result.size()]);
+    }
+
+    private void rootToLeafPathsRec(Node root, String path, List<String> result){
+        if(root.left == null && root.right == null){
+            result.add(path + root.value);
+        }
+        if(root.left != null){
+            rootToLeafPathsRec(root.left, path + root.value + "->", result);
+        }
+        if(root.right != null){
+            rootToLeafPathsRec(root.right, path + root.value + "->", result);
+        }
+    }
+
+
+
 
 /*
   //Gather N-ary Tree Levels (executed directly on leetcode https://leetcode.com/problems/n-ary-tree-level-order-traversal/)
@@ -332,4 +358,5 @@ class Node {
     }
 
  */
+
 }

@@ -336,4 +336,44 @@ class BinaryTreesTest {
 
     }
 
+    @Test
+    @DisplayName("Calculate Depth")
+    void calculateDepth(){
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        assertEquals(2, this.binaryTrees.calculateDepth(root));
+
+        Node root2 = new Node(5);
+        root2.left = new Node(1);
+        root2.right = new Node(29);
+        root2.right.left = new Node(4);
+        root2.right.right = new Node(13);
+        assertEquals(3, this.binaryTrees.calculateDepth(root2));
+
+        Node root1 = new Node(100);
+        root1.left = new Node(53);
+        root1.right = new Node(78);
+        root1.right.right = new Node(20);
+        root1.right.left = new Node(9);
+        root1.right.left.right = new Node(3);
+        root1.right.left.left = new Node(32);
+        assertEquals(4, this.binaryTrees.calculateDepth(root1));
+    }
+
+    @Test
+    @DisplayName("Root to Leaf Paths")
+    void rootToLeafPaths(){
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        assertArrayEquals(new String[]{"1->2", "1->3"}, this.binaryTrees.rootToLeafPaths(root));
+
+        Node root2 = new Node(5);
+        root2.left = new Node(1);
+        root2.right = new Node(29);
+        root2.right.left = new Node(4);
+        root2.right.right = new Node(13);
+        assertArrayEquals(new String[]{"5->1", "5->29->4", "5->29->13"}, this.binaryTrees.rootToLeafPaths(root2));
+    }
 }
