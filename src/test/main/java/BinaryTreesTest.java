@@ -376,4 +376,102 @@ class BinaryTreesTest {
         root2.right.right = new Node(13);
         assertArrayEquals(new String[]{"5->1", "5->29->4", "5->29->13"}, this.binaryTrees.rootToLeafPaths(root2));
     }
+
+    @Test
+    @DisplayName("Root to Leaf Path Sum")
+    void rootToLeafPathSum(){
+        Node root = new Node(1);
+        root.left = new Node(5);
+        root.left.left = new Node(1);
+        root.right = new Node(2);
+        root.right.right = new Node(29);
+        root.right.left = new Node(12);
+        assertTrue(this.binaryTrees.rootToLeafPathSum(root, 15));
+
+        Node root2 = new Node(104);
+        root2.left = new Node(39);
+        root2.right = new Node(31);
+        root2.right.left = new Node(9);
+        root2.right.right = new Node(10);
+        root2.left.left = new Node(32);
+        root2.left.right = new Node(1);
+        assertTrue(this.binaryTrees.rootToLeafPathSum(root2, 175));
+
+        Node root3= new Node(1);
+        root3.left = new Node(5);
+        root3.right = new Node(2);
+        assertFalse(this.binaryTrees.rootToLeafPathSum(root3, 4));
+    }
+
+    @Test
+    @DisplayName("Validate Tree")
+    void validateBST(){
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        assertFalse(this.binaryTrees.validateBST(root));
+
+        Node root2 = new Node(2);
+        root2.left = new Node(1);
+        root2.right = new Node(3);
+        assertTrue(this.binaryTrees.validateBST(root2));
+        Node root3 = new Node(5);
+        root3.right = new Node(6);
+        root3.right.left = new Node(3);
+        root3.right.right = new Node(7);
+        root3.left = new Node(4);
+        assertFalse(this.binaryTrees.validateBST(root3));
+    }
+
+    @Test
+    @DisplayName("Symmetrical Tree")
+    void symetricalTree(){
+        Node root = new Node(2);
+        root.left = new Node(1);
+        root.right = new Node(1);
+        assertTrue(this.binaryTrees.symetricalTree(root));
+
+        Node root2 = new Node(1);
+        root2.left = new Node(5);
+        root2.left.right = new Node(7);
+        root2.right = new Node(5);
+        root2.right.right = new Node(7);
+        assertFalse(this.binaryTrees.symetricalTree(root2));
+    }
+    @Test
+    @DisplayName("Same Leaves")
+    void sameLeaves(){
+        Node root1a = new Node(1);
+        root1a.left = new Node(1);
+        root1a.right = new Node(3);
+
+        Node root1b = new Node(7);
+        root1b.left = new Node(1);
+        root1b.right = new Node(2);
+        assertFalse(this.binaryTrees.sameLeaves(root1a, root1b));
+
+
+        Node root2a = new Node(8);
+        root2a.left = new Node(2);
+        root2a.right = new Node(29);
+        root2a.right.left = new Node(3);
+        root2a.right.right = new Node(9);
+
+        Node root2b = new Node(8);
+        root2b.left = new Node(2);
+        root2b.left.left = new Node(2);
+        root2b.right = new Node(29);
+        root2b.right.left = new Node(3);
+        root2b.right.left.left = new Node(3);
+        root2b.right.right = new Node(9);
+        assertTrue(this.binaryTrees.sameLeaves(root2a, root2b));
+
+        Node root3a = new Node(1);
+        root3a.left = new Node(2);
+
+        Node root3b = new Node(2);
+        root3b.left = new Node(2);
+        assertTrue(this.binaryTrees.sameLeaves(root3a, root3b));
+
+    }
 }

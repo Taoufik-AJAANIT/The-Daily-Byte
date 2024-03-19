@@ -290,25 +290,121 @@ public class BinaryTrees<T extends Comparable<T>> {
     }
 
     public String[] rootToLeafPaths(Node<Integer> root) {
-        if(root == null) return null;
+        if (root == null) return null;
         List<String> result = new ArrayList();
         rootToLeafPathsRec(root, "", result);
         return result.toArray(new String[result.size()]);
     }
 
-    private void rootToLeafPathsRec(Node root, String path, List<String> result){
-        if(root.left == null && root.right == null){
+    private void rootToLeafPathsRec(Node root, String path, List<String> result) {
+        if (root.left == null && root.right == null) {
             result.add(path + root.value);
         }
-        if(root.left != null){
+        if (root.left != null) {
             rootToLeafPathsRec(root.left, path + root.value + "->", result);
         }
-        if(root.right != null){
+        if (root.right != null) {
             rootToLeafPathsRec(root.right, path + root.value + "->", result);
         }
     }
 
+    public boolean rootToLeafPathSum(Node<Integer> root, int target) {
+        if (root == null) return false;
+        if (root.right == null && root.left == null) {
+            if (root.value == target) {
+                return true;
+            }
+        }
+        return rootToLeafPathSum(root.left, target - root.value) || rootToLeafPathSum(root.right, target - root.value);
+    }
 
+    public boolean validateBST(Node<Integer> root) {
+        if (root == null)
+            return true;
+        Stack<Node<Integer>> stack = new Stack<>();
+        Node<Integer> pre = null;
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            if (pre != null && root.value <= pre.value)
+                return false;
+            pre = root;
+            root = root.right;
+        }
+        return true;
+    }
+
+    public boolean symetricalTree(Node root) {
+        if (root == null) return true;
+        if (root.left == null && root.right == null) {
+            return true;
+        }
+        if (root.left != null && root.right != null) {
+            return symetricalTreeRecc(root.left, root.right);
+        }
+        return false;
+
+    }
+
+    private boolean symetricalTreeRecc(Node root1, Node root2) {
+        if (root1 == null && root2 == null) return true;
+        if (root1 != null && root2 != null) {
+            return root1.value == root2.value
+                    && symetricalTreeRecc(root1.left, root2.right)
+                    && symetricalTreeRecc(root1.right, root2.left);
+        }
+        return false;
+    }
+
+    public boolean sameLeaves(Node rootA, Node rootB) {
+        if (rootA == null && rootB == null) return true;
+        Node leafA = null, leafB = null;
+
+        Stack<Node<Integer>> stackA = new Stack<>();
+        Stack<Node<Integer>> stackB = new Stack<>();
+        while (leafA == null && leafB == null) {
+            while (!stackA.isEmpty() || rootA != null) {
+                while (rootA != null) {
+                    stackA.push(rootA);
+                    rootA = rootA.left;
+                }
+                rootA = stackA.pop();
+                if (rootA.right == null && rootA.left == null) {
+                    leafA = rootA;
+                    rootA = rootA.right;
+                    break;
+                }
+                rootA = rootA.right;
+
+            }
+            while (!stackB.isEmpty() || rootB != null) {
+                while (rootB != null) {
+                    stackB.push(rootB);
+                    rootB = rootB.left;
+                }
+                rootB = stackB.pop();
+                if (rootB.right == null && rootB.left == null) {
+                    leafB = rootB;
+                    rootB = rootB.right;
+                    break;
+                }
+                rootB = rootB.right;
+
+            }
+            if (leafA == null && leafB == null) {
+                break;
+            }
+            if (leafA.value != leafB.value) {
+                return false;
+            }
+            leafA = null;
+            leafB = null;
+        }
+        return stackA.isEmpty() && stackB.isEmpty();
+    }
 
 
 /*
