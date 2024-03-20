@@ -406,6 +406,15 @@ public class BinaryTrees<T extends Comparable<T>> {
         return stackA.isEmpty() && stackB.isEmpty();
     }
 
+    public int sumLeftLeaves(Node<Integer> root) {
+        if(root == null) return 0;
+        if (root.left == null && root.right == null) return 0;
+        if (root.left != null && root.left.left == null && root.left.right == null){
+            return (int) root.left.value + sumLeftLeaves(root.right);
+        }
+        return sumLeftLeaves(root.left) + sumLeftLeaves(root.right);
+    }
+
 
 /*
   //Gather N-ary Tree Levels (executed directly on leetcode https://leetcode.com/problems/n-ary-tree-level-order-traversal/)

@@ -474,4 +474,23 @@ class BinaryTreesTest {
         assertTrue(this.binaryTrees.sameLeaves(root3a, root3b));
 
     }
+
+    @Test
+    @DisplayName("Same Leaves")
+    void sumLeftLeaves(){
+        Node roota = new Node(5);
+        roota.left = new Node(2);
+        roota.right = new Node(12);
+        roota.right.left = new Node(3);
+        roota.right.right = new Node(8);
+        assertEquals(5, this.binaryTrees.sumLeftLeaves(roota));
+
+        Node rootb = new Node(2);
+        rootb.left = new Node(4);
+        rootb.left.left = new Node(3);
+        rootb.left.right = new Node(9);
+        rootb.right = new Node(2);
+        assertEquals(3, this.binaryTrees.sumLeftLeaves(rootb));
+
+    }
 }
