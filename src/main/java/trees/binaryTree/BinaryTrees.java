@@ -407,12 +407,52 @@ public class BinaryTrees<T extends Comparable<T>> {
     }
 
     public int sumLeftLeaves(Node<Integer> root) {
-        if(root == null) return 0;
+        if (root == null) return 0;
         if (root.left == null && root.right == null) return 0;
-        if (root.left != null && root.left.left == null && root.left.right == null){
+        if (root.left != null && root.left.left == null && root.left.right == null) {
             return (int) root.left.value + sumLeftLeaves(root.right);
         }
         return sumLeftLeaves(root.left) + sumLeftLeaves(root.right);
+    }
+
+    public List<String> stringPermutations(String input) {
+        Node root = new Node("");
+        Node latestNodeLeft = root;
+        Node latestNodeRight = root;
+        for (int i = 0; i < input.length(); i++) {
+            if (Character.isAlphabetic(input.charAt(i))) {
+                Node upperCaseNode = new Node<>(Character.toUpperCase(input.charAt(i)));
+                Node lowerCaseNode = new Node<>(Character.toLowerCase(input.charAt(i)));
+                latestNodeLeft.left = upperCaseNode;
+                latestNodeLeft.right = lowerCaseNode;
+                if (latestNodeRight != latestNodeLeft) {
+                    latestNodeRight.left = upperCaseNode;
+                    latestNodeRight.right = lowerCaseNode;
+                }
+                latestNodeLeft = upperCaseNode;
+                latestNodeRight = lowerCaseNode;
+            } else {
+                Node node = new Node(input.charAt(i));
+                latestNodeLeft.left = node;
+                if (latestNodeRight != latestNodeLeft) {
+                    latestNodeRight.left = node;
+                }
+                latestNodeRight = node;
+                latestNodeLeft = node;
+            }
+        }
+        List result = new ArrayList<>();
+        rootToLeafPaths(root, "", result);
+        return result;
+    }
+
+    void rootToLeafPaths(Node root, String path, List result) {
+        if (root == null) return;
+        if (root.left == null && root.right == null) {
+            result.add(path + root.value);
+        }
+        rootToLeafPaths(root.left, path + root.value, result);
+        rootToLeafPaths(root.right, path + root.value, result);
     }
 
 

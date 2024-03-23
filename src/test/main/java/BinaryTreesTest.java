@@ -3,10 +3,9 @@ package test.main.java;
 import main.java.linkedlists.LinkedList;
 import main.java.trees.binaryTree.BinaryTrees;
 import main.java.trees.binaryTree.Node;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -492,5 +491,11 @@ class BinaryTreesTest {
         rootb.right = new Node(2);
         assertEquals(3, this.binaryTrees.sumLeftLeaves(rootb));
 
+    }
+
+    @Test
+    @DisplayName("String Permutations")
+    void stringPermutations(){
+        Assertions.assertIterableEquals(Arrays.asList("C7W2", "C7w2", "c7W2", "c7w2"), this.binaryTrees.stringPermutations("c7w2"));
     }
 }
