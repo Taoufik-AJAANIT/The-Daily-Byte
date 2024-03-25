@@ -20,10 +20,10 @@ public class Backtracking {
             result.add(solution);
             return;
         }
-        if (Character.isAlphabetic(input.charAt(index))){
+        if (Character.isAlphabetic(input.charAt(index))) {
             generateStringPermutations(input, result, index + 1, solution + Character.toUpperCase(input.charAt(index)));
             generateStringPermutations(input, result, index + 1, solution + Character.toLowerCase(input.charAt(index)));
-        }else {
+        } else {
             generateStringPermutations(input, result, index + 1, solution + input.charAt(index));
         }
     }
@@ -43,14 +43,44 @@ public class Backtracking {
         return result;
     }
 
-    void generateTextMessagesRec(String input, List result, int index, String solution, HashMap<Character, String> keys){
-        if (input.length() == 0 ) return;
+    void generateTextMessagesRec(String input, List result, int index, String solution, HashMap<Character, String> keys) {
+        if (input.length() == 0) return;
         if (input.length() == index) {
             result.add(solution);
             return;
         }
-        for (int i = 0; i < keys.get(input.charAt(index)).length(); i++){
+        for (int i = 0; i < keys.get(input.charAt(index)).length(); i++) {
             generateTextMessagesRec(input, result, index + 1, solution + keys.get(input.charAt(index)).charAt(i), keys);
         }
+    }
+
+    public boolean wordSearch(char[][] board, String input) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == input.charAt(0)) {
+                   boolean found = wordSearchRec(board, input, 0, i , j);
+                   if (found){
+                       return true;
+                   }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean wordSearchRec(char[][] board, String input, int index, int i, int j) {
+        if (index == input.length()) {
+            return true;
+        }
+        if (i >= board.length || i < 0 || j >= board[i].length || j < 0 || board[i][j] != input.charAt(index))
+            return false;
+        char temp = board[i][j];
+        board[i][j] = '*';
+        boolean found = wordSearchRec(board, input, index + 1, i + 1, j)
+                || wordSearchRec(board, input, index + 1, i - 1, j)
+                || wordSearchRec(board, input, index + 1, i, j + 1)
+                || wordSearchRec(board, input, index + 1, i, j - 1);
+        board[i][j] = temp;
+        return found;
     }
 }
