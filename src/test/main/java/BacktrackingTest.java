@@ -47,5 +47,14 @@ class BacktrackingTest {
                 {'A','D','E','E'}
         };
         assertTrue(this.backtracking.wordSearch(board2, "ABCESEEEFS"));
+    }    @Test
+    @DisplayName("Gold Rush")
+    void goldRush(){
+        int[][] board = new int[][]{
+                {0,2,0},
+                {8,6,3},
+                {0,9,0}
+        };
+        assertEquals(23, this.backtracking.goldRush(board));
     }
 }

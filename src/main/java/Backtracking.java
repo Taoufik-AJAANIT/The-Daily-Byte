@@ -58,10 +58,10 @@ public class Backtracking {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 if (board[i][j] == input.charAt(0)) {
-                   boolean found = wordSearchRec(board, input, 0, i , j);
-                   if (found){
-                       return true;
-                   }
+                    boolean found = wordSearchRec(board, input, 0, i, j);
+                    if (found) {
+                        return true;
+                    }
                 }
             }
         }
@@ -82,5 +82,36 @@ public class Backtracking {
                 || wordSearchRec(board, input, index + 1, i, j - 1);
         board[i][j] = temp;
         return found;
+    }
+
+    public int goldRush(int[][] board) {
+        int sum = 0;
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] != 0) {
+                    sum = Math.max(goldRushRec(board, i, j, 0), sum);
+                }
+            }
+        }
+        return sum;
+    }
+
+    private int goldRushRec(int[][] board, int i, int j, int currentSum) {
+        if (i < 0 || i >= board.length
+                || j < 0 || j >= board[0].length
+                || board[i][j] == 0) {
+            return currentSum;
+        }
+        int temp = board[i][j];
+        board[i][j] = 0;
+        int result = Math.max(Math.max(
+                        goldRushRec(board, i + 1, j, currentSum + temp),
+                        goldRushRec(board, i - 1, j, currentSum + temp)
+                ),
+                Math.max(goldRushRec(board, i, j + 1, currentSum + temp),
+                        goldRushRec(board, i, j - 1, currentSum + temp))
+        );
+        board[i][j] = temp;
+        return result;
     }
 }
