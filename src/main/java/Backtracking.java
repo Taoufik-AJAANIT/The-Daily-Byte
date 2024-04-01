@@ -1,9 +1,6 @@
 package main.java;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Backtracking {
 
@@ -113,5 +110,68 @@ public class Backtracking {
         );
         board[i][j] = temp;
         return result;
+    }
+
+
+    //        1 ()
+    //        2 ()() (())
+    //        3 (()()) ((())) ()()() ()(()) (())()
+    public Set<String> parenthesesGeneration(int number) {
+        Set<String> result = new HashSet<>();
+        parenthesesGenerationRec(number, "", "", result);
+        return result;
+    }
+
+    private void  parenthesesGenerationRec(int number, String prefix, String suffix, Set<String> result) {
+        if (number == 1){
+            result.add(prefix + "()" + suffix);
+            return;
+        }
+        parenthesesGenerationRec(number - 1, "("  + prefix, ")" + suffix, result);
+        parenthesesGenerationRec(number - 1, ""  + prefix, "()" + suffix, result);
+        parenthesesGenerationRec(number - 1, "()" + prefix, "" + suffix, result);
+    }
+
+    public List<String> parenthesesGeneration2(int n) {
+        List<String> res = new ArrayList<String>();
+        parenthesesGenerationRec2(res, 0, 0, "", n);
+        return res;
+    }
+
+    public void parenthesesGenerationRec2(List<String> res, int left, int right, String s, int n) {
+        if (s.length() == n * 2) {
+            res.add(s);
+            return;
+        }
+
+        if (left < n) {
+            parenthesesGenerationRec2(res, left + 1, right, s + "(", n);
+        }
+
+        if (right < left) {
+            parenthesesGenerationRec2(res, left, right + 1, s + ")", n);
+        }
+    }
+
+    public List<List<Integer>> uniqueCombinations(int[] ints, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        uniqueCombinationsRec(result, ints, target, 0, new ArrayList<>(), 0);
+        return result;
+
+    }
+
+    private void uniqueCombinationsRec(List<List<Integer>> result, int[] ints, int target, int sum, ArrayList<Integer> path, int index) {
+        if (sum == target){
+            result.add(path);
+            return;
+        }
+        if (sum > target){
+            return;
+        }
+        for (int i = index; i < ints.length; i++){
+            ArrayList<Integer> newPath = new ArrayList<>(path);
+            newPath.add(ints[i]);
+            uniqueCombinationsRec(result, ints, target, sum + ints[i], newPath, i);
+        }
     }
 }
